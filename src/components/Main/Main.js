@@ -3,31 +3,29 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { GET_MOVIE_QUERY } from '../../queries/GetMovie'
 import { SEARCH_MOVIE_QUERY } from '../../queries/SearchMovie'
 import { ACTIONS } from '../../redux/actions'
 import Loading from '../Loading'
 
 const Main = () => {
-    const { loading, data, error } = useQuery(SEARCH_MOVIE_QUERY, {
-        variables: {
-            query: {
-                query: 'Star',
-            },
-        },
-    })
-
-    const state = useSelector((state) => state)
-    console.log('state: ', state);
+    const { query } = useSelector((state) => state)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch({
             type: ACTIONS.SET_QUERY,
             payload: {
-                query: 'sanyi',
+                query: 'Star Wars',
             },
         })
     }, [])
+
+    const { loading, data, error } = useQuery(SEARCH_MOVIE_QUERY, {
+        variables: {
+            query: {
+                query,
+            },
+        },
+    })
 
     const getWikiPediaResults = async () => {
         try {
