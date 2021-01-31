@@ -1,4 +1,4 @@
-import { ApolloProvider, useQuery, useMutation } from '@apollo/react-hooks'
+import { ApolloProvider } from '@apollo/react-hooks'
 import ApolloClient from 'apollo-boost'
 import Main from './components/Main'
 import Header from './components/Header'

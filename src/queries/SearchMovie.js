@@ -5,8 +5,8 @@ export const SEARCH_MOVIE_QUERY = gql`
         searchMovie(query: $query) {
             page
             results {
-                title,
-
+                id
+                title
             }
             total_pages
             total_results
