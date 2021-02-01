@@ -10,5 +10,7 @@ export const queryReducer = (state = initialState, action) => {
                 query,
             }
         }
+        default:
+            return state
     }
 }
