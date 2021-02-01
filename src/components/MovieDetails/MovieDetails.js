@@ -8,6 +8,7 @@ import { useQuery } from '@apollo/client'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import { WIKIPEDIA_API_URL } from '../../config'
+import Loading from '../Loading'
 
 const getWikiPediaResults = async (title) => {
     try {
@@ -27,6 +28,7 @@ const getWikiPediaResults = async (title) => {
 
 const MovieDetails = ({ id, title }) => {
     const [wikiResults, setWikiResults] = useState(null)
+    const [loading, setLoading] = useState(false)
 
     const { data } = useQuery(GET_SIMILAR_MOVIES_QUERY, {
         variables: {
@@ -36,11 +38,16 @@ const MovieDetails = ({ id, title }) => {
     })
 
     useEffect(() => {
-        getWikiPediaResults(title).then((response) => setWikiResults(response))
+        setLoading(true)
+        getWikiPediaResults(title).then((response) => {
+            setWikiResults(response)
+            setLoading(false)
+        })
     }, [title])
 
     return (
         <>
+            {loading && <Loading />}
             {wikiResults?.data?.query?.search.map((result, index) => (
                 <div key={index}>
                     <Typography variant="body2">
