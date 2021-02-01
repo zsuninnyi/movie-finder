@@ -7,10 +7,11 @@ import { GET_SIMILAR_MOVIES_QUERY } from '../../queries/GetSimilarMovies'
 import { useQuery } from '@apollo/client'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
+import { WIKIPEDIA_API_URL } from '../../config'
 
 const getWikiPediaResults = async (title) => {
     try {
-        const response = await axios.get('https://en.wikipedia.org/w/api.php', {
+        const response = await axios.get(WIKIPEDIA_API_URL, {
             params: {
                 action: 'query',
                 list: 'search',
